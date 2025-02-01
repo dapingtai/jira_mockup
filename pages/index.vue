@@ -4,7 +4,7 @@
       <div class="flex flex-col gap-4 lg:w-1/2 lg:mx-auto">
         <h1 class="text-4xl font-bold mb-8">Connect every team, task and project together with Jira</h1>
         <div class="flex flex-col gap-4 w-1/2">
-          <AppInput label="Works mail"></AppInput>
+          <AppInput v-model="workEmail" label="Works mail"></AppInput>
           <label class="text-gray-500 text-xs">I agree to the Atlassian Customer Agreement, which incorporates by reference the AI Product-Specific Terms, and acknowledge the Privacy Policy.</label>
           <AppButton variant="primary" class="!rounded">Get Jira free</AppButton>
           <AppDivider><span class="mx-2">Or sign up with</span></AppDivider>
@@ -41,26 +41,6 @@
         </div>
       </div>
     </div>
-    
-    <!-- Cards Section -->
-    <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-      <AppCard
-        v-for="card in cards"
-        :key="card.id"
-        :title="card.title"
-        :description="card.description"
-        :image-url="card.imageUrl"
-      >
-        <button 
-          @click="openModal(card)"
-          class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        >
-          Learn More
-        </button>
-      </AppCard>
-    </div> -->
-
-    <!-- <AppImageUploader></AppImageUploader> -->
 
     <footer class="text-center bg-gray-100 h-20vh w-full">
       <div class="flex justify-center items-center h-full">
@@ -92,6 +72,7 @@
                 :label="item.title"
                 :placeholder="item.placeholder"
                 :options="item.options"
+                :required="item.required"
               ></AppSelectMenu>
             </div>
             <div v-else>
@@ -102,6 +83,7 @@
                 :key="item.key"
                 :placeholder="item.placeholder"
                 :helpText="item.helpText"
+                :required="item.required"
               ></AppInput>
             </div>
           </div>
@@ -115,33 +97,7 @@
 </template>
 
 <script setup lang="ts">
-// interface Card {
-//   id: number
-//   title: string
-//   description: string
-//   imageUrl?: string
-// }
-
-// const cards: Card[] = [
-//   {
-//     id: 1,
-//     title: "First Card",
-//     description: "This is the first card description.",
-//     imageUrl: "https://picsum.photos/400/300?random=1"
-//   },
-//   {
-//     id: 2,
-//     title: "Second Card",
-//     description: "This is the second card description.",
-//     imageUrl: "https://picsum.photos/400/300?random=2"
-//   },
-//   {
-//     id: 3,
-//     title: "Third Card",
-//     description: "This is the third card description.",
-//     imageUrl: "https://picsum.photos/400/300?random=3"
-//   }
-// ]
+const workEmail = ref<string>('')
 
 const form = ref([
   {
@@ -155,7 +111,8 @@ const form = ref([
       { label: 'Bug 反饋', value: 'bug' },
       { label: '其他', value: 'other' },
     ],
-    value: null
+    value: '',
+    required: true
   },
   {
     key: 'title',
@@ -163,7 +120,8 @@ const form = ref([
     type: 'text',
     placeholder: '請輸入標題',
     value: '',
-    helpText: '(限30字符內)'
+    helpText: '(限30字符內)',
+    required: true
   },
   {
     key: 'description',
@@ -171,20 +129,21 @@ const form = ref([
     type: 'text',
     placeholder: '請描述你的意見/問題',
     value: '',
-    helpText: '(限300字符內)'
+    helpText: '(限300字符內)',
+    required: true
   },
   {
     key: 'image',
     title: '圖片',
     type: 'image',
     value: [],
-    helpText: '(僅支持(PNG, JPG)格式，每張5MB內)'
+    helpText: '(僅支持(PNG, JPG)格式，每張5MB內)',
+    required: false
   }
 ])
 
 const modalTitle = ref<string>('意見反饋')
 const showModal = ref<boolean>(false)
-// const selectedCard = ref<Card | null>(null)
 
 const openModal = () => {
   showModal.value = true

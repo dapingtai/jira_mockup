@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="flex gap- items-center mb-1">
+    <div class="flex gap-2 items-center mb-1">
+      <label class="text-red-500" v-if="required">*</label>
       <label v-if="label" :for="id" class="block text-sm font-medium text-gray-700">
         {{ label }}
       </label>
@@ -39,6 +40,7 @@ interface Props {
   helpText?: string
   className?: string
   id?: string
+  required?: boolean
 }
 
 withDefaults(defineProps<Props>(), {
@@ -46,6 +48,7 @@ withDefaults(defineProps<Props>(), {
   placeholder: '',
   disabled: false,
   className: '',
+  required: false,
   id: () => `input-${Math.random().toString(36).substr(2, 9)}`
 })
 

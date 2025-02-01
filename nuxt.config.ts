@@ -20,5 +20,17 @@ export default defineNuxtConfig({
     }
   },
 
-  compatibilityDate: '2025-01-27'
+  compatibilityDate: '2025-01-27',
+
+  veeValidate: {
+    // disable or enable auto imports
+    autoImports: true,
+    // Use different names for components
+    componentNames: {
+      Form: 'VeeForm',
+      Field: 'VeeField',
+      FieldArray: 'VeeFieldArray',
+      ErrorMessage: 'VeeErrorMessage',
+    },
+  }
 })

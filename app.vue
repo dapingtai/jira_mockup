@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const config = useRuntimeConfig()
 const title = 'Jira'
 const description = 'Jira 首頁'
 
