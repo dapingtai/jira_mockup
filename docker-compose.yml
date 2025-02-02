@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  # You can comment this webserver section if you want to use another webserver/proxy or test PeerTube in local
+  web:
+    image: ""
+    container_name: jira_frontend
+    build:
+      context: .
+    ports:
+      - "8080:3000"
+    restart: "unless-stopped"

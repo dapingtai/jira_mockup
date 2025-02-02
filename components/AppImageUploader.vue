@@ -55,7 +55,7 @@
     </div>
 
     <!-- Preview Modal -->
-    <AppModal v-model="showPreview" :title="'團片預覽'" :width="'max-w-fit'">
+    <AppModal v-model="showPreview" :title="'團片預覽'" :width="'max-w-fit'" :show-header="false">
       <img
         v-if="selectedImage"
         :src="selectedImage.url"

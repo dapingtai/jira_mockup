@@ -17,7 +17,7 @@
         :class="[
           'block w-full rounded border px-2 py-1 text-left text-md',
           'focus:border-blue-500 focus:ring-blue-500',
-          error ? 'border-red-300' : 'border-gray-300',
+          errorMessage ? 'border-red-300' : 'border-gray-300',
           disabled ? 'bg-gray-100 cursor-not-allowed' : 'bg-white',
           className
         ]"
@@ -66,12 +66,12 @@
         </ul>
       </div>
     </div>
-    <p v-if="error" class="mt-1 text-sm text-red-600">{{ error }}</p>
+    <p v-if="errorMessage" class="mt-1 text-sm text-red-600">{{ errorMessage }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { useField } from 'vee-validate';
 
 interface Option {
   value: string
@@ -79,12 +79,12 @@ interface Option {
 }
 
 interface Props {
+  name: string
   modelValue: string
-  options: Option[]
+  options?: Option[]
   label?: string
   placeholder?: string
   disabled?: boolean
-  error?: string
   helpText?: string
   className?: string
   id?: string
@@ -92,6 +92,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  name: 'AppSelectMenu',
   options: () => [],
   placeholder: '',
   disabled: false,
@@ -121,6 +122,7 @@ const closeDropdown = () => {
 }
 
 const selectOption = (option: Option) => {
+  value.value = option.value
   emit('update:modelValue', option.value)
   closeDropdown()
 }
@@ -140,4 +142,6 @@ onMounted(() => {
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
 })
+
+const { value, errorMessage } = useField(() => props.name);
 </script>

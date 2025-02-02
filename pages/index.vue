@@ -60,7 +60,7 @@
       width="w-80% md:w-1/2 lg:w-1/3"
     >
       <div class="relative h-80vh">
-        <form class="flex flex-col gap-4 h-90% overflow-auto">
+        <form class="flex flex-col gap-4 h-90% overflow-auto" @submit.prevent="onSubmit">
           <div v-for="item in form" :key="item.key" class="px-2">
             <div v-if="item.type === 'image'" class="flex flex-col w-full">
               <label class="block text-sm font-medium text-gray-700 mb-1">參考圖片</label>
@@ -68,15 +68,17 @@
             </div>
             <div v-else-if="item.type === 'select'" class="flex flex-col w-full">
               <AppSelectMenu
+                :name="item.key"
                 v-model="item.value"
                 :label="item.title"
                 :placeholder="item.placeholder"
-                :options="item.options"
                 :required="item.required"
+                :options="item.options"
               ></AppSelectMenu>
             </div>
             <div v-else>
               <AppInput
+                :name="item.key"
                 v-model="item.value"
                 :label="item.title"
                 :type="item.type"
@@ -84,22 +86,64 @@
                 :placeholder="item.placeholder"
                 :helpText="item.helpText"
                 :required="item.required"
-              ></AppInput>
+              >
+              </AppInput>
             </div>
           </div>
           <div class="absolute bottom-2 w-full">
-            <AppButton variant="primary" :fullWidth="true">提交</AppButton>
+            <AppButton variant="primary" :fullWidth="true" type="submit">提交</AppButton>
           </div>
         </form>
+      </div>
+    </AppModal>
+
+    <!-- Success Modal -->
+    <AppModal
+      v-model="showSuccessModal"
+      title="提交成功"
+      width="w-128"
+      :show-header="false"
+    >
+      <div class="flex flex-col items-start justify-start text-center gap-8">
+        <div class="flex gap-2 items-center text-green-500">
+          <Icon name="material-symbols:check-circle" class="text-green-500" size="24" />
+          <label class="text-lg">提交成功</label>
+        </div>
+        
+        <p>感謝您的反饋，我們將繼續努力，提供更優質的服務!</p>
       </div>
     </AppModal>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useForm } from 'vee-validate';
+const { schema } = useValidation();
+const { handleSubmit } = useForm({
+  validationSchema: schema
+});
+
+interface Option {
+  value: string
+  label: string
+}
+
+interface Form {
+  key: string
+  title: string
+  placeholder?: string
+  type: string
+  value: any
+  helpText?: string
+  options?: Option[]
+  required?: boolean
+}
+
 const workEmail = ref<string>('')
 
-const form = ref([
+const form = ref<
+  Form[]
+>([
   {
     key: 'category',
     title: '類別',
@@ -148,4 +192,16 @@ const showModal = ref<boolean>(false)
 const openModal = () => {
   showModal.value = true
 }
+
+const showSuccessModal = ref<boolean>(false)
+
+const closeSuccessModal = () => {
+  showSuccessModal.value = false
+}
+
+const onSubmit = handleSubmit((values: any) => {
+  console.log('Form submitted:', values)
+  showModal.value = false
+  showSuccessModal.value = true
+})
 </script>
