@@ -3,6 +3,12 @@ export default defineNuxtConfig({
 
   ssr: false,
 
+  nitro: {
+    output: {
+      publicDir: 'docs' // 讓 Nuxt 產出的靜態檔案存到 `docs/`
+    }
+  },
+
   modules: ['@unocss/nuxt', '@nuxt/icon', '@vee-validate/nuxt'],
 
   css: [
