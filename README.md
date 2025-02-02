@@ -1,5 +1,11 @@
 # Nuxt3 UnoCSS 專案
 
+## 部署靜態網站
+```bash
+npm run generate  
+```
+- 網站位置: https://dapingtai.github.io/jira_mockup/
+
 ## 技術架構
 
 ### 使用的技術
