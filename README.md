@@ -3,23 +3,44 @@
 ## 技術架構
 
 ### 使用的技術
-- **前端框架**: Nuxt.js 3
 - **程式語言**: TypeScript
+- **前端框架**: Nuxt.js 3
 - **CSS框架**: UnoCSS
+- **表單驗證**: Vee-validate
+- **開發工具**: 
+  - @nuxt/devtools - Nuxt 開發工具
+  - @nuxt/icon - 圖標組件
+  - @types/node - Node.js 類型定義
+- **核心依賴**:
+  - @vee-validate/nuxt - Nuxt的表單驗證整合
+  - @vee-validate/yup - Yup驗證架構整合
 - **Package Manager**: npm/yarn
 
 ### 專案結構
 ```
 ├── components/
-│   ├── AppCard.vue      # 可重複使用的卡片元件
-│   ├── AppModal.vue     # 彈出視窗元件
-│   └── AppNavbar.vue    # 導航欄元件
+│   ├── AppButton.vue       # 按鈕元件
+│   ├── AppCard.vue        # 可重複使用的卡片元件
+│   ├── AppDivider.vue     # 分隔線元件
+│   ├── AppImageUploader.vue# 圖片上傳元件
+│   ├── AppInput.vue       # 輸入框元件
+│   ├── AppModal.vue       # 彈出視窗元件
+│   ├── AppNavbar.vue      # 導航欄元件
+│   ├── AppSelect.vue      # 選擇框元件
+│   └── AppSelectMenu.vue  # 下拉選單元件
+├── composables/
+│   └── useValidation.ts   # 表單驗證邏輯
+├── layouts/
+│   └── default.vue        # 預設佈局
 ├── pages/
-│   └── index.vue        # 首頁
-├── nuxt.config.ts       # Nuxt 設定檔
-├── package.json         # 專案依賴配置
-├── tsconfig.json        # TypeScript 設定檔
-└── uno.config.ts        # UnoCSS 設定檔
+│   └── index.vue          # 首頁
+├── app.vue                # 應用程式入口
+├── docker-compose.yml     # Docker 配置文件
+├── Dockerfile             # Docker 構建文件
+├── nuxt.config.ts         # Nuxt 設定檔
+├── package.json           # 專案依賴配置
+├── tsconfig.json          # TypeScript 設定檔
+└── uno.config.ts          # UnoCSS 設定檔
 ```
 
 ## 安裝指南
