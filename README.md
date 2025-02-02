@@ -10,8 +10,9 @@ npm run generate
 
 ### 使用技術
 - **程式語言**: TypeScript
-- **前端框架**: Nuxt.js 3
+- **前端框架**: Nuxt.js 3 (Vue 3.5.13)
 - **CSS框架**: UnoCSS
+- **ICON依賴**: https://icones.js.org/
 - **表單驗證**: Vee-validate
 - **開發工具**: 
   - @nuxt/devtools - Nuxt 開發工具
