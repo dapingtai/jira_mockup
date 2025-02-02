@@ -8,7 +8,7 @@
     "dev": "nuxt dev --dotenv .env.sit",
     "dev:uat": "nuxt dev --dotenv .env.uat",
     "dev:prod": "nuxt dev --dotenv .env.prod",
-    "generate": "nuxt generate",
+    "generate": "nuxt generate --dotenv .env.prod",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
