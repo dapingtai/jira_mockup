@@ -8,7 +8,7 @@ npm run generate
 
 ## 技術架構
 
-### 使用的技術
+### 使用技術
 - **程式語言**: TypeScript
 - **前端框架**: Nuxt.js 3
 - **CSS框架**: UnoCSS
@@ -53,8 +53,8 @@ npm run generate
 
 1. 複製專案:
 ```bash
-git clone [repository-url]
-cd nuxt3-unocss-專案
+git clone https://github.com/dapingtai/jira_mockup.git
+cd jira_mockup
 ```
 
 2. Install dependencies:
@@ -123,3 +123,7 @@ yarn preview
 - 開發環境支援熱模組替換
 - 內建 @nuxt/devtools 開發工具
 - 整合 UnoCSS 實現高效能的 utility-first CSS 開發
+
+### 5. 優化功能
+- 圖片上傳可拖曳
+- API 請求模擬
